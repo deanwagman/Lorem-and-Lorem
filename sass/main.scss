@@ -35,6 +35,8 @@ h2{
 	font-size: 3em;
 	color: $orange;
 	position: relative;
+	margin-left: 1%;
+	text-transform: uppercase;
 }
 h2::before{
 	content: "Our";
@@ -43,11 +45,12 @@ h2::before{
 	font-size: 0.5em;
 	font-family: 'Dancing Script', cursive;
 	bottom: 50px;
+	text-transform: none;
 }
 
 p, span{
-	font-family: 'Josefin Slab', serif;
-	font-size: 1.2em;
+	font-family: 'Roboto Slab', serif;
+	font-size: 1.1em;
 	line-height: 1.5em;
 }
 
@@ -55,16 +58,57 @@ section{
 	width: 100%;
 	min-height: 800px;
 	background: #FFF;
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
 }
+
+main{
+	width: 90%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 70px 0;
+	position: relative;
+	z-index: 3;
+}
+
+.btn{
+	@include transition(all .25s ease 0);
+}
+.btn:hover{
+	color: $dark;
+	background: $egg;
+}
+.btn:active{
+	position: relative;
+	top: 5px;
+}
+
+/**************
+		NAV
+**************/
 
 nav{
 	@include flexr($justify: space-around, $align: center);
+	position: relative;
+	z-index: 3;
 }
+
+a#menu-toggle{
+	display: none;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: $egg;
+	padding: 20px;
+	font-size: 1.5em;
+}
+
 .main-nav, .social{
 	list-style: none;
-	& li{
+	@include flexr($justify: center, $align: center);
+	/*& li{
 		float: left;
-	}
+	}*/
 	a{
 		@include link-colors($egg, $egg, $egg, $egg, $egg);
 		text-decoration: none;
@@ -87,24 +131,57 @@ nav{
 		@include hide-text;
 	}
 }
+@media screen and (max-width: 800px){
+	.social{
+		display: none;
+	}
+	.main-nav li{
+		padding: 40px 0;
+	}
+	nav{
+		display: block;
+	}
+	.main-nav{
+		-webkit-justify-content: space-around;
+		-moz-justify-content: space-around;
+		-ms-justify-content: space-around;
+		justify-content: space-around;
+	}
+}
+@media screen and (max-width: 420px){
+	.main-nav{
+		display: none;
+	}
+	a#menu-toggle{
+		display: block;
+	}
+
+	
+}
+
+
+
+/******************
+	FIRST SECTION
+******************/
+
 section:first-child{
 	background: linear-gradient(rgba(236,60,73,.9), rgba(236,60,73,.9)),
 				image-url('meeting-room.jpg');
+	background-size: cover;
 	& p{
 		color: $egg;
 		max-width: 600px;
 	}
-	position: relative;
-	z-index: -1;
 }
 section:first-child::after{
 	content: ' ';
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	transform: skewY(-25deg);
+	@include transform(skewY(-25deg));
 	background: linear-gradient(rgba(236,60,73,.9), rgba(255,255,255,.3));
-	z-index: -5;
+	z-index: 1;
 	box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
 }
 section:first-child::before{
@@ -112,17 +189,21 @@ section:first-child::before{
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	transform: skewY(25deg) translateY(110%);
+	@include transform(skewY(25deg) translateY(110%));
 	background: linear-gradient(rgba(255,255,255,.2), rgba(255,255,255,.2));
-	z-index: -3;
+	z-index: 2;
 }
-main{
-	width: 90%;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 70px 0;
+
+// Container for the Text
+.hero-container{
 	position: relative;
+	float: right;
+	height: 100%;
+	max-width: 600px;
+	padding: 10% 0;
 }
+
+// Down Arrow
 .hero-container::after{
 	content: inline-image('sprites/arrow-down-L.png');
 	position: absolute;
@@ -133,33 +214,42 @@ main{
 	height: 42px;
 }
 
-
-.hero-container{
-	position: relative;
-	float: right;
-	height: 100%;
-	max-width: 600px;
-	padding: 10% 0;
+@media screen and (max-width: 800px){
+	h1{
+		font-size: 3em;
+	}
+	h1::before{
+		content: "";
+	}
+	.hero-container{
+		max-width: 400px;
+		padding: 50px 0;
+	}
+	.hero-container::after{
+		bottom: -40px;
+	}
+	section:first-child main{
+		padding: 10px 0;
+	}
 }
 
-.work{
-	overflow: hidden;
-	position:relative;
-}
+
+/*****************
+			WORK
+*****************/
+
 
 .work h2+p{
 	margin: 20px 0 60px 1%;
-	max-width: 500px;
-	@include clearfix;
+	max-width: 400px;
 }
-
 
 .work::after{
 	content: ' ';
 	position: absolute;
 	height: 80%;
 	width: 100%;
-	transform: skewY(-25deg) translateY(-103%);
+	@include transform(skewY(-25deg) translateY(-104.5%));
 	background: $navy;
 	z-index: 1;
 }
@@ -168,10 +258,30 @@ main{
 	position: absolute;
 	height: 80%;
 	width: 100%;
-	transform: skewY(25deg) translateY(125%);
+	@include transform(skewY(25deg) translateY(125%));
 	background: $navy;
 	z-index: 2;
 	box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
+}
+
+.work a{
+	display: block;
+	width: 280px;
+	position: relative;
+	z-index: 3;
+	color: $egg;
+	text-transform: uppercase;
+	font-family: 'Lato', sans-serif;
+	background: $bloodOrange;
+	padding: 20px;
+	text-decoration: none;
+	font-size: .8em;
+	margin: 20px auto;
+	text-align: center;
+	-webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 36% 100%);
+	-moz-clip-path: polygon(0 0, 100% 0, 100% 100%, 36% 100%);
+	-ms-clip-path: polygon(0 0, 100% 0, 100% 100%, 36% 100%);
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 35% 100%);
 }
 
 .tile-container{
@@ -213,18 +323,17 @@ main{
 	}
 }
 
+/*************
+	PHILOSOPHY
+*************/
 
 .philosophy{
 	padding: 50px 0 200px 0;
-	position: relative;
-	overflow: hidden;
 	background: linear-gradient(rgba(236,60,73,.9), rgba(236,60,73,.9)),
 				image-url('workspace.jpg') no-repeat;
 	background-size: cover;
 	p,h2,h3{
 		color: $egg;
-		position: relative;
-		z-index: 3;
 	}
 	h3{
 		margin: 20px 0;
@@ -235,6 +344,7 @@ main{
 	}
 	.ideals{
 		@include flexr($el: div, $justify: space-between, $align: flex-start);
+		-webkit-flex-wrap: wrap;
 		margin: 100px 0;
 		.ideal{
 			max-width: 350px;
@@ -246,7 +356,7 @@ main{
 	height: 86.75%;
 	width: 100%;
 	background: linear-gradient(125deg, rgba(255,255,255,.3), rgba(236,60,73,.9));
-	transform: skewY(25deg) translateY(-103%);
+	@include transform(skewY(25deg) translateY(-103%));
 	position: absolute;
 	z-index: 1;
 	box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
@@ -277,12 +387,24 @@ main{
 }
 .tile-container img{
 	min-height: 100%;
-	min-width: 100%;
-	max-width: 150%;
 	max-height: 150%;
 }
 .tile-1, .tile-2{
 	overflow: hidden;
+}
+
+@media screen and (max-width: 1000px){
+	.tile-2{
+		display: none;
+	}
+	.tile-container .tile-1{
+		width: 48%;
+	}
+}
+@media screen and (max-width: 500px){
+	.tile-container .tile-1{
+		width: 98%;
+	}
 }
 
 /****************************
@@ -291,12 +413,8 @@ main{
 
 .clients{
 	padding: 50px 0 0 0;
-	position: relative;
-	overflow: hidden;
 	main{
 		max-width: 1000px;
-		position: relative;
-		z-index: 3;
 	}
 }
 .clients h2+p{
@@ -306,6 +424,9 @@ main{
 .clients ul{
 	@include flexr($el: li, $justify: center, $align: stretch);
 	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
+	flex-wrap: wrap;
 	width: 100%;
 	max-width: 1000px;
 	margin: 0 auto;
@@ -319,7 +440,7 @@ main{
 	height: 100%;
 	width: 100%;
 	background: $navy;
-	transform: skewY(25deg) translateY(-207%);
+	@include transform(skewY(25deg) translateY(-207%));
 	position: absolute;
 	z-index: 2;
 	box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
@@ -329,7 +450,7 @@ main{
 	height: 100%;
 	width: 100%;
 	background: $orange;
-	transform: skewY(25deg) translateY(100%);
+	@include transform(skewY(25deg) translateY(100%));
 	position: absolute;
 	z-index: 2;
 }
@@ -338,25 +459,23 @@ main{
 			CALL TO ACTION
 **************************/
 
-section.call-to-action{
+.call-to-action{
 	background: linear-gradient(rgba(46,60,80,.95) rgba(46,60,80,.95)),
 	            image-url('joinus.jpg') no-repeat;
 	background-size: cover;
-	position: relative;
-	overflow: hidden;
-	z-index: 1;
 	text-align: center;
 	color: $egg;
 	h2{
 		color: $egg;
 		margin: 5px 0 30px 0;
 	}
+	h2::before{
+		content: "";
+	}
 	min-height: 450px;
 	main{
 		width: 80%;
-		max-width: 400px;
-		position: relative;
-		z-index: 3;
+		max-width: 500px;
 	}
 	a{
 		padding: 20px;
@@ -379,7 +498,7 @@ section.call-to-action{
 	z-index: 2;
 	top: 0;
 	left: 0;
-	transform: skewY(25deg) translateY(11%);
+	@include transform(skewY(25deg) translateY(11%));
 }
 
 /*********************
@@ -393,6 +512,8 @@ footer{
 .super-footer{
 	@include flexr($el: div, $justify: space-around, $align: flex-start);
 	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
 	padding: 50px;
 	h3{
 		margin: 20px 0 20px 0;
@@ -432,10 +553,15 @@ footer{
 	min-height: 50px;
 	background: $orange;
 	display: -webkit-flex;
+	display: -ms-flex;
+	display: -moz-flex;
+	display: flex;
 	-webkit-justify-content: space-around;
+	-ms-justify-content: space-around;
+	-moz-justify-content: space-around;
+	justify-content: space-around;
 	-webkit-align-items: center;
+	-ms-align-items: center;
+	-moz-align-items: center;
+	align-items: center;
 }
-
-
-
-
