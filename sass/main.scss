@@ -20,6 +20,17 @@ $dark: #4D3740;
 h1, h2, h3, nav{
 	font-family: 'Lato', sans-serif;
 }
+h1{
+	font-size: 4.5em;
+	margin: 20px 0;
+	text-transform: uppercase;
+	color: $egg;
+}
+h1::before{
+	content: url('../img/quill.svg');
+	position: absolute;
+	left: -90px;
+}
 h2{
 	font-size: 3em;
 	color: $orange;
@@ -42,12 +53,12 @@ p, span{
 
 section{
 	width: 100%;
-	height: 800px;
+	min-height: 800px;
 	background: #FFF;
 }
 
 nav{
-	@include flexr($direction: horizontal, $justify: space-around, $align: center);
+	@include flexr($justify: space-around, $align: center);
 }
 .main-nav, .social{
 	list-style: none;
@@ -94,6 +105,7 @@ section:first-child::after{
 	transform: skewY(-25deg);
 	background: linear-gradient(rgba(236,60,73,.9), rgba(255,255,255,.3));
 	z-index: -5;
+	box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
 }
 section:first-child::before{
 	content: ' ';
@@ -120,17 +132,7 @@ main{
 	width: 42px;
 	height: 42px;
 }
-h1{
-	font-size: 4.5em;
-	margin: 20px 0;
-	text-transform: uppercase;
-	color: $egg;
-}
-h1::before{
-	content: url('../img/quill.svg');
-	position: absolute;
-	left: -90px;
-}
+
 
 .hero-container{
 	position: relative;
@@ -140,30 +142,33 @@ h1::before{
 	padding: 10% 0;
 }
 
-
+.work{
+	overflow: hidden;
+	position:relative;
+}
 
 .work h2+p{
 	margin: 20px 0 60px 1%;
 	max-width: 500px;
+	@include clearfix;
 }
 
 
 .work::after{
 	content: ' ';
 	position: absolute;
-	height: 100%;
+	height: 80%;
 	width: 100%;
-	transform: skewY(-25deg) translateY(-101%);
+	transform: skewY(-25deg) translateY(-103%);
 	background: $navy;
 	z-index: 1;
-	clip: rect(0, 0, 500px, 500px);
 }
 .work::before{
 	content: ' ';
 	position: absolute;
-	height: 100%;
+	height: 80%;
 	width: 100%;
-	transform: skewY(25deg) translateY(100%);
+	transform: skewY(25deg) translateY(125%);
 	background: $navy;
 	z-index: 2;
 	box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
@@ -171,6 +176,7 @@ h1::before{
 
 .tile-container{
 	position: relative;
+	overflow: hidden;
 	z-index: 2;
 	@include clearfix;
 	width: 100%;
@@ -188,6 +194,9 @@ h1::before{
 		background: $orange;
 		float: left;
 	}
+	.tile-2:nth-child(even){
+		background: $grape;
+	}
 	h3{
 		font-family: 'Dancing Script' cursive;
 		text-align: center;
@@ -203,3 +212,230 @@ h1::before{
 		margin: 60px 50px;
 	}
 }
+
+
+.philosophy{
+	padding: 50px 0 200px 0;
+	position: relative;
+	overflow: hidden;
+	background: linear-gradient(rgba(236,60,73,.9), rgba(236,60,73,.9)),
+				image-url('workspace.jpg') no-repeat;
+	background-size: cover;
+	p,h2,h3{
+		color: $egg;
+		position: relative;
+		z-index: 3;
+	}
+	h3{
+		margin: 20px 0;
+	}
+	.tile-1, .tile-2{
+		background: $teal;
+		overflow: hidden;
+	}
+	.ideals{
+		@include flexr($el: div, $justify: space-between, $align: flex-start);
+		margin: 100px 0;
+		.ideal{
+			max-width: 350px;
+		}
+	}
+}
+.philosophy::after{
+	content: " ";
+	height: 86.75%;
+	width: 100%;
+	background: linear-gradient(125deg, rgba(255,255,255,.3), rgba(236,60,73,.9));
+	transform: skewY(25deg) translateY(-103%);
+	position: absolute;
+	z-index: 1;
+	box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
+}
+
+.philosophy h2+p{
+	margin: 20px 0 60px 1%;
+	max-width: 500px;
+}
+.philosophy a{
+	display: block;
+	width: 280px;
+	position: relative;
+	z-index: 3;
+	color: $egg;
+	text-transform: uppercase;
+	font-family: 'Lato', sans-serif;
+	background: $navy;
+	padding: 20px;
+	text-decoration: none;
+	font-size: .8em;
+	margin: 0 auto;
+	text-align: center;
+	-webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 36% 100%);
+	-moz-clip-path: polygon(0 0, 100% 0, 100% 100%, 36% 100%);
+	-ms-clip-path: polygon(0 0, 100% 0, 100% 100%, 36% 100%);
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 35% 100%);
+}
+.tile-container img{
+	min-height: 100%;
+	min-width: 100%;
+	max-width: 150%;
+	max-height: 150%;
+}
+.tile-1, .tile-2{
+	overflow: hidden;
+}
+
+/****************************
+					CLIENTS
+****************************/
+
+.clients{
+	padding: 50px 0 0 0;
+	position: relative;
+	overflow: hidden;
+	main{
+		max-width: 1000px;
+		position: relative;
+		z-index: 3;
+	}
+}
+.clients h2+p{
+	margin: 20px 0 60px 1%;
+	max-width: 500px;
+}
+.clients ul{
+	@include flexr($el: li, $justify: center, $align: stretch);
+	-webkit-flex-wrap: wrap;
+	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+.clients li img{
+	max-width: 100%;
+	width: 100%;
+}
+.clients::after{
+	content: " ";
+	height: 100%;
+	width: 100%;
+	background: $navy;
+	transform: skewY(25deg) translateY(-207%);
+	position: absolute;
+	z-index: 2;
+	box-shadow: 0 0 40px 0 rgba(0,0,0,.1);
+}
+.clients::before{
+	content: " ";
+	height: 100%;
+	width: 100%;
+	background: $orange;
+	transform: skewY(25deg) translateY(100%);
+	position: absolute;
+	z-index: 2;
+}
+
+/**************************
+			CALL TO ACTION
+**************************/
+
+section.call-to-action{
+	background: linear-gradient(rgba(46,60,80,.95) rgba(46,60,80,.95)),
+	            image-url('joinus.jpg') no-repeat;
+	background-size: cover;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+	text-align: center;
+	color: $egg;
+	h2{
+		color: $egg;
+		margin: 5px 0 30px 0;
+	}
+	min-height: 450px;
+	main{
+		width: 80%;
+		max-width: 400px;
+		position: relative;
+		z-index: 3;
+	}
+	a{
+		padding: 20px;
+		color: $egg;
+		background: $orange;
+		width: 225px;
+		display: block;
+		text-transform: uppercase;
+		font-family: 'Lato', sans-serif;
+		text-decoration: none;
+		margin: 30px auto 0 auto;
+	}
+}
+.call-to-action::after{
+	content: " ";
+	height: 100%;
+	width: 100%;
+	background: rgba(255,255,255,.04);
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	transform: skewY(25deg) translateY(11%);
+}
+
+/*********************
+			FOOTER
+*********************/
+
+footer{
+	background: $egg;
+	color: $navy;
+}
+.super-footer{
+	@include flexr($el: div, $justify: space-around, $align: flex-start);
+	-webkit-flex-wrap: wrap;
+	padding: 50px;
+	h3{
+		margin: 20px 0 20px 0;
+	}
+	line-height: 1.5em;
+	li, p, span{
+		font-size: 0.9em;
+	}
+	span{
+		margin: 30px 0 0 0;
+		position: relative;
+		display: block;
+	}
+	span::after{
+		content: "";
+		position: absolute;
+		top: -15px;
+		left: 0;
+		width: 35%;
+		height: 3px;
+		background: $bloodOrange;
+	}
+}
+.footer-links{
+	@include flexr($el: div, $justify: center, $align: flex-start);
+	div{
+		margin: 0 20px;
+	}
+}
+.footer-about{
+	max-width: 200px;
+}
+.sub-footer{
+	font-family: 'Lato', sans-serif;
+	color: $egg;
+	width: 100%;
+	min-height: 50px;
+	background: $orange;
+	display: -webkit-flex;
+	-webkit-justify-content: space-around;
+	-webkit-align-items: center;
+}
+
+
+
+
